@@ -1,0 +1,15 @@
+.profile-page{
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.profile-card-page{
+  border-radius: 14px;
+  overflow: hidden;
+}
+.profile-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top: 14px;
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SPUSM E-REPORT | Student Profile</title>
+
+  <!-- reuse your dashboard styles -->
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/profile.css" />
+</head>
+
+<body>
+  <!-- Top Header (same style as dashboard) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <img src="assets/spusm-logo.png" alt="SPUSM Logo"
+               onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');"/>
+          <div class="logo-fallback-badge" title="SPUSM"></div>
+        </div>
+
+        <div class="brand-text">
+          <div class="brand-title">Student Profile</div>
+          <div class="brand-subtitle">St. Paul University at San Miguel</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button class="icon-btn" id="backBtn" type="button" aria-label="Back">
+          <span class="icon">⬅️</span>
+        </button>
+
+        <button class="logout-btn" id="logoutBtn" type="button">
+          <span class="logout-icon">⟲</span>
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container profile-page">
+      <section class="profile-card-page">
+        <div class="profile-head">
+          <div class="profile-head-left">
+            <span class="profile-ico" aria-hidden="true">👤</span>
+            <div>
+              <h2 class="profile-title">Profile Information</h2>
+              <p class="profile-subtitle">Manage your student profile details</p>
+            </div>
+          </div>
+
+          <button class="profile-edit" id="profileEditBtn" type="button">✎ Edit Profile</button>
+        </div>
+
+        <div class="profile-body">
+          <div class="profile-avatar">
+            <span id="profileInitials">MC</span>
+          </div>
+
+          <div class="profile-name" id="profileNameTitle">Maria Clara Santos</div>
+          <div class="profile-id" id="profileIdTitle">2024-0001234</div>
+
+          <div class="profile-grid">
+            <div class="pfield">
+              <label>Full Name</label>
+              <input id="pFullName" type="text" value="Maria Clara Santos" disabled />
+            </div>
+
+            <div class="pfield">
+              <label>School ID</label>
+              <input id="pSchoolId" type="text" value="2024-0001234" disabled />
+              <small>Cannot be edited</small>
+            </div>
+
+            <div class="pfield">
+              <label>Grade Level / Section</label>
+              <input id="pGrade" type="text" value="Grade 11 - STEM A" disabled />
+            </div>
+
+            <div class="pfield">
+              <label>Email Address</label>
+              <input id="pEmail" type="email" value="maria.santos@spusm.edu.ph" disabled />
+            </div>
+
+            <div class="pfield span-2">
+              <label>Contact Number</label>
+              <input id="pContact" type="text" value="+63 912 345 6789" disabled />
+            </div>
+          </div>
+
+          <div class="profile-note">
+            <strong>Note:</strong> Your School ID cannot be changed. If you need to update it, please contact the administrator or registrar’s office.
+          </div>
+
+          <div class="profile-actions" id="profileActions" style="display:none;">
+            <button class="outline-btn" id="cancelEdit" type="button">Cancel</button>
+            <button class="primary-btn" id="saveEdit" type="button">Save Changes</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/profile.js"></script>
+</body>
+</html>

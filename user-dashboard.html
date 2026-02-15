@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SPUSM E-REPORT | User Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+
+<body>
+  <!-- Top Header -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <!-- Replace with your actual logo image if you have one -->
+          <img src="assets/spusm-logo.png" alt="SPUSM Logo" onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');"/>
+          <div class="logo-fallback-badge" title="SPUSM"></div>
+        </div>
+
+        <div class="brand-text">
+          <div class="brand-title">SPUSM E-REPORT</div>
+          <div class="brand-subtitle">Web-Based Service Request and Action Tracking</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <div class="notif-wrap">
+  <button class="icon-btn" id="notifBtn" type="button" aria-label="Notifications" aria-expanded="false">
+    <span class="icon">🔔</span>
+    <span class="notif-dot" id="notifCount">3</span>
+  </button>
+
+  <!-- Notifications Dropdown -->
+  <div class="notif-menu" id="notifMenu" aria-hidden="true">
+    <div class="notif-head">
+      <div class="notif-head-left">
+        <span class="notif-head-icon">🔔</span>
+        <span class="notif-head-title">Notifications</span>
+      </div>
+      <span class="notif-badge" id="notifNewBadge">3 new</span>
+    </div>
+
+    <div class="notif-list" id="notifList">
+      <!-- JS will render items here -->
+    </div>
+
+    <div class="notif-footer">
+      <button class="notif-footer-btn" type="button" id="markAllBtn">Mark all as read</button>
+      <button class="notif-footer-primary" type="button" id="viewAllBtn">
+        <span class="eye">👁</span> View all
+      </button>
+    </div>
+  </div>
+</div>
+
+<button class="icon-btn" id="settingsBtn" type="button" aria-label="Settings">
+  <span class="icon">⚙️</span>
+</button>
+
+        <button class="icon-btn" id="topProfileBtn" type="button" aria-label="Profile">
+  <span class="icon">👤</span>
+</button>
+
+        <button class="logout-btn" id="logoutBtn" type="button">
+          <span class="logout-icon">⟲</span>
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="page">
+    <div class="container">
+      <!-- Tabs -->
+      <nav class="tabs-pill" aria-label="Primary navigation">
+        <button class="tab-pill active" data-tab="dashboardTab" type="button">Dashboard</button>
+        <button class="tab-pill" data-tab="submitTab" type="button">Submit Report</button>
+        <button class="tab-pill" data-tab="myReportsTab" type="button">My Reports</button>
+      </nav>
+
+      <!-- Tab Contents -->
+      <section class="tab-content active" id="dashboardTab">
+        <!-- Stats -->
+        <div class="stats-grid">
+          <article class="stat-card stat-total">
+            <div class="stat-icon" aria-hidden="true">📄</div>
+            <div class="stat-meta">
+              <div class="stat-number" id="totalReports">4</div>
+              <div class="stat-label">Total Reports</div>
+            </div>
+          </article>
+
+          <article class="stat-card stat-pending">
+            <div class="stat-icon" aria-hidden="true">🕒</div>
+            <div class="stat-meta">
+              <div class="stat-number" id="pendingReports">2</div>
+              <div class="stat-label">Pending</div>
+            </div>
+          </article>
+
+          <article class="stat-card stat-progress">
+            <div class="stat-icon" aria-hidden="true">📈</div>
+            <div class="stat-meta">
+              <div class="stat-number" id="inProgressReports">1</div>
+              <div class="stat-label">In Progress</div>
+            </div>
+          </article>
+
+          <article class="stat-card stat-resolved">
+            <div class="stat-icon" aria-hidden="true">✅</div>
+            <div class="stat-meta">
+              <div class="stat-number" id="resolvedReports">1</div>
+              <div class="stat-label">Resolved</div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Recent Reports -->
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Recent Reports</h2>
+              <p class="panel-subtitle">Your latest submitted reports and their current status</p>
+            </div>
+
+            <button class="primary-btn" id="newReportBtn" type="button">
+              <span class="btn-plus" aria-hidden="true">＋</span>
+              New Report
+            </button>
+          </div>
+
+          <div class="panel-body">
+            <div class="report-list" id="recentReports">
+              <!-- Item -->
+              <article class="report-item">
+                <div class="report-left">
+                  <div class="report-avatar avatar-blue" aria-hidden="true">i</div>
+                  <div class="report-info">
+                    <div class="report-title">Cyberbullying Incident</div>
+                    <div class="report-meta">Bullying • 2024-01-15</div>
+                  </div>
+                </div>
+                <div class="report-right">
+                  <span class="chip chip-status chip-review">Under Review</span>
+                  <span class="chip chip-priority chip-high">High</span>
+                </div>
+              </article>
+
+              <!-- Item -->
+              <article class="report-item">
+                <div class="report-left">
+                  <div class="report-avatar avatar-green" aria-hidden="true">✓</div>
+                  <div class="report-info">
+                    <div class="report-title">Damaged Property in Library</div>
+                    <div class="report-meta">Property Damage • 2024-01-10</div>
+                  </div>
+                </div>
+                <div class="report-right">
+                  <span class="chip chip-status chip-resolved">Resolved</span>
+                  <span class="chip chip-priority chip-medium">Medium</span>
+                </div>
+              </article>
+
+              <!-- Item -->
+              <article class="report-item">
+                <div class="report-left">
+                  <div class="report-avatar avatar-orange" aria-hidden="true">!</div>
+                  <div class="report-info">
+                    <div class="report-title">Safety Concern - Broken Stairs</div>
+                    <div class="report-meta">Safety • 2024-01-08</div>
+                  </div>
+                </div>
+                <div class="report-right">
+                  <span class="chip chip-status chip-progress">In Progress</span>
+                  <span class="chip chip-priority chip-high">High</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Campus Safety Resources -->
+        <section class="panel panel-warm">
+          <div class="panel-head">
+            <div class="panel-title-row">
+              <span class="shield" aria-hidden="true">🛡️</span>
+              <h2 class="panel-title">Campus Safety Resources</h2>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <div class="resource-grid">
+              <button class="resource-card" type="button" id="guidelinesBtn">
+                <div class="resource-icon" aria-hidden="true">📄</div>
+                <div class="resource-text">Report Guidelines</div>
+              </button>
+
+              <button class="resource-card" type="button" id="counselingBtn">
+                <div class="resource-icon" aria-hidden="true">👥</div>
+                <div class="resource-text">Counseling Services</div>
+              </button>
+
+              <button class="resource-card" type="button" id="emergencyBtn">
+                <div class="resource-icon" aria-hidden="true">🛡️</div>
+                <div class="resource-text">Emergency Contacts</div>
+              </button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Submit Report Tab -->
+      <section class="tab-content" id="submitTab">
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2 class="panel-title">Submit New Report</h2>
+        <p class="panel-subtitle">Report incidents, safety concerns, or other issues confidentially</p>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <form class="report-form" id="reportForm">
+        <!-- Report Category -->
+        <div class="field">
+          <label class="label" for="category">Report Category</label>
+          <div class="control select">
+            <select id="category" name="category" required>
+              <option value="" selected disabled>Select category</option>
+              <option>Bullying</option>
+              <option>Safety</option>
+              <option>Property Damage</option>
+              <option>Facility Concern</option>
+              <option>IT / Tech</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Detailed Description -->
+        <div class="field">
+          <label class="label" for="description">Detailed Description</label>
+          <div class="control">
+            <textarea id="description" name="description" rows="6" placeholder="Provide a detailed description of the incident or concern..." required></textarea>
+          </div>
+        </div>
+
+        <!-- Location + Date -->
+        <div class="grid-2">
+          <div class="field">
+            <label class="label" for="location">Location</label>
+            <div class="control select">
+              <select id="location" name="location" required>
+                <option value="" selected disabled>Where did this occur?</option>
+                <option>Main Campus</option>
+                <option>Library</option>
+                <option>Classroom</option>
+                <option>Hallway</option>
+                <option>Canteen</option>
+                <option>Gym</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="incidentDate">Date of Incident</label>
+            <div class="control">
+              <input id="incidentDate" name="incidentDate" type="date" placeholder="dd/mm/yyyy" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- Attachments -->
+        <div class="field">
+          <label class="label" for="attachments">Attachments (Optional)</label>
+
+          <div class="upload-box" id="uploadBox">
+            <div class="upload-icon" aria-hidden="true">⤒</div>
+            <div class="upload-text">
+              <div class="upload-title">Drag &amp; drop image here, or click to select images</div>
+              <div class="upload-sub">Supported: Images (Max 10MB)</div>
+            </div>
+
+            <input
+              class="upload-input"
+              id="attachments"
+              name="attachments"
+              type="file"
+              accept="image/*"
+              multiple
+            />
+
+            <button class="upload-btn" type="button" id="chooseFilesBtn">
+              <span aria-hidden="true">📎</span>
+              Choose Files
+            </button>
+
+            <div class="upload-preview" id="uploadPreview" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <!-- Privacy Level -->
+        <div class="privacy-panel">
+          <div class="privacy-title">Privacy Level</div>
+
+          <label class="privacy-option">
+            <input type="radio" name="privacy" value="anonymous" />
+            <span class="privacy-dot"></span>
+            <span class="privacy-main">
+              <span class="privacy-name">Anonymous</span>
+              <span class="privacy-desc">
+                Your name will not be displayed on the report, but your identity may still be traceable by administrators using your school ID or session information.
+              </span>
+            </span>
+          </label>
+
+          <label class="privacy-option active" data-default="true">
+            <input type="radio" name="privacy" value="confidential" checked />
+            <span class="privacy-dot"></span>
+            <span class="privacy-main">
+              <span class="privacy-name">Confidential (Recommended)</span>
+              <span class="privacy-desc">
+                Your name will only be visible to administrators handling your case. It will not be shared publicly.
+              </span>
+            </span>
+          </label>
+
+          <label class="privacy-option">
+            <input type="radio" name="privacy" value="public" />
+            <span class="privacy-dot"></span>
+            <span class="privacy-main">
+              <span class="privacy-name">Public</span>
+              <span class="privacy-desc">
+                Your identity will be visible to all authorized users in the system. This encourages transparency and accountability.
+              </span>
+            </span>
+          </label>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+          <button class="submit-wide" type="submit">Submit Report</button>
+          <button class="outline-btn" type="button" id="saveDraftBtn">Save as Draft</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</section>
+
+
+      <!-- My Reports Tab -->
+<section class="tab-content" id="myReportsTab">
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2 class="panel-title">My Report History</h2>
+        <p class="panel-subtitle">Track the progress of all your submitted reports</p>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="myreports-list">
+
+        <!-- 1 -->
+        <article class="history-card"
+  data-id="#000001"
+  data-title="Cyberbullying Incident"
+  data-category="Bullying"
+  data-submitted="2024-01-15"
+  data-location="Main Building - Room 203"
+  data-description="The electric fan in Room 203 is not functioning properly. The fan blades are not rotating even when switched on. This has been causing discomfort during afternoon classes due to inadequate ventilation. The issue has been present for the past week and affects approximately 35 students during class hours."
+  data-status="Under Review"
+  data-priority="High Priority"
+  data-attachments="assets/sample-attach-1.jpg,assets/sample-attach-2.jpg"
+>
+
+          <div class="h-left">
+            <div class="h-avatar avatar-blue" aria-hidden="true">i</div>
+
+            <div class="h-main">
+              <h3 class="h-title">Cyberbullying Incident</h3>
+              <div class="h-sub">Report ID: #000001</div>
+
+              <div class="h-cat">Category: Bullying</div>
+
+              <div class="h-actions">
+                <button class="btn-sm btn-muted" type="button">View Details</button>
+                <button class="btn-sm" type="button">Add Update</button>
+                <button class="btn-sm btn-danger" type="button">Withdraw</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-right">
+            <div class="h-badges">
+              <span class="chip chip-status chip-review">Under Review</span>
+              <span class="chip chip-priority chip-high chip-priority-text">High Priority</span>
+            </div>
+            <div class="h-date">Submitted: 2024-01-15</div>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="history-card"
+  data-id="#000002"
+  data-title="Damaged Property in Library"
+  data-category="Property Damage"
+  data-submitted="2024-01-10"
+  data-location="Library"
+  data-description="A table and chair were damaged in the library. The issue was reported to staff and needs repair/replacement."
+  data-status="Resolved"
+  data-priority="Medium Priority"
+  data-attachments=""
+>
+
+          <div class="h-left">
+            <div class="h-avatar avatar-green" aria-hidden="true">✓</div>
+
+            <div class="h-main">
+              <h3 class="h-title">Damaged Property in Library</h3>
+              <div class="h-sub">Report ID: #000002</div>
+
+              <div class="h-cat">Category: Property Damage</div>
+
+              <div class="h-actions">
+                <button class="btn-sm btn-muted" type="button">View Details</button>
+                <button class="btn-sm" type="button">Add Update</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-right">
+            <div class="h-badges">
+              <span class="chip chip-status chip-resolved">Resolved</span>
+              <span class="chip chip-priority chip-medium chip-priority-text">Medium Priority</span>
+            </div>
+            <div class="h-date">Submitted: 2024-01-10</div>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="history-card"
+  data-id="#000003"
+  data-title="Safety Concern - Broken Stairs"
+  data-category="Safety"
+  data-submitted="2024-01-08"
+  data-location="Staircase near Hallway"
+  data-description="One stair step is cracked and unstable. This could cause injuries if not fixed."
+  data-status="In Progress"
+  data-priority="High Priority"
+  data-attachments=""
+>
+
+          <div class="h-left">
+            <div class="h-avatar avatar-orange" aria-hidden="true">!</div>
+
+            <div class="h-main">
+              <h3 class="h-title">Safety Concern - Broken Stairs</h3>
+              <div class="h-sub">Report ID: #000003</div>
+
+              <div class="h-cat">Category: Safety</div>
+
+              <div class="h-actions">
+                <button class="btn-sm btn-muted" type="button">View Details</button>
+                <button class="btn-sm" type="button">Add Update</button>
+                <button class="btn-sm btn-danger" type="button">Withdraw</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-right">
+            <div class="h-badges">
+              <span class="chip chip-status chip-progress">In Progress</span>
+              <span class="chip chip-priority chip-high chip-priority-text">High Priority</span>
+            </div>
+            <div class="h-date">Submitted: 2024-01-08</div>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="history-card"
+  data-id="#000004"
+  data-title="Discrimination Report"
+  data-category="Discrimination"
+  data-submitted="2024-01-05"
+  data-location="Main Campus"
+  data-description="A discrimination-related concern was reported and is pending review."
+  data-status="Pending"
+  data-priority="High Priority"
+  data-attachments=""
+>
+
+          <div class="h-left">
+            <div class="h-avatar avatar-orange" aria-hidden="true">o</div>
+
+            <div class="h-main">
+              <h3 class="h-title">Discrimination Report</h3>
+              <div class="h-sub">Report ID: #000004</div>
+
+              <div class="h-cat">Category: Discrimination</div>
+
+              <div class="h-actions">
+                <button class="btn-sm btn-muted" type="button">View Details</button>
+                <button class="btn-sm btn-muted" type="button">✎ Edit Report</button>
+                <button class="btn-sm" type="button">Add Update</button>
+                <button class="btn-sm btn-danger" type="button">Withdraw</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-right">
+            <div class="h-badges">
+              <span class="chip chip-status chip-pending">Pending</span>
+              <span class="chip chip-priority chip-high chip-priority-text">High Priority</span>
+            </div>
+            <div class="h-date">Submitted: 2024-01-05</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settingsOverlay" aria-hidden="true">
+  <div class="settings-modal" role="dialog" aria-modal="true" aria-label="Settings">
+    <button class="modal-x" type="button" id="settingsX" aria-label="Close">×</button>
+
+    <div class="settings-head">
+      <div class="settings-title-row">
+        <span class="settings-gear" aria-hidden="true">⚙️</span>
+        <div>
+          <h2 class="settings-title">Settings</h2>
+          <p class="settings-sub">Manage your account settings and preferences</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="settings-body">
+      <!-- Profile -->
+      <div class="settings-section">
+        <div class="section-label">
+          <span class="section-ico" aria-hidden="true">👤</span>
+          <span>Profile</span>
+        </div>
+
+        <button class="settings-row" type="button" id="editProfileBtn">
+          <span class="row-ico ico-green" aria-hidden="true">👤</span>
+          <span class="row-main">
+            <span class="row-title">Edit Profile</span>
+            <span class="row-desc">Update your personal information</span>
+          </span>
+          <span class="row-arrow" aria-hidden="true">›</span>
+        </button>
+      </div>
+
+      <!-- Account -->
+      <div class="settings-section">
+        <div class="section-label">
+          <span class="section-ico" aria-hidden="true">🔒</span>
+          <span>Account</span>
+        </div>
+
+        <button class="settings-row" type="button" id="changePassBtn">
+          <span class="row-ico ico-amber" aria-hidden="true">🔑</span>
+          <span class="row-main">
+            <span class="row-title">Change Password</span>
+            <span class="row-desc">Update your account password</span>
+          </span>
+          <span class="row-arrow" aria-hidden="true">›</span>
+        </button>
+      </div>
+
+      <!-- Preferences -->
+      <div class="settings-section">
+        <div class="section-label">
+          <span class="section-ico" aria-hidden="true">⚙️</span>
+          <span>Preferences</span>
+        </div>
+
+        <div class="settings-row no-hover">
+          <span class="row-ico ico-blue" aria-hidden="true">🔔</span>
+          <span class="row-main">
+            <span class="row-title">Notifications</span>
+            <span class="row-desc">Receive updates about your reports</span>
+          </span>
+
+          <label class="switch">
+            <input type="checkbox" id="prefNotif" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="settings-row no-hover">
+          <span class="row-ico ico-purple" aria-hidden="true">🌙</span>
+          <span class="row-main">
+            <span class="row-title">Dark Mode</span>
+            <span class="row-desc">Toggle dark theme appearance</span>
+          </span>
+
+          <label class="switch">
+            <input type="checkbox" id="prefDark" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-footer">
+      <button class="settings-close" type="button" id="settingsClose">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Report Guidelines Modal -->
+<div class="modal-overlay" id="guidelinesOverlay" aria-hidden="true">
+  <div class="guidelines-modal" role="dialog" aria-modal="true" aria-label="Report Guidelines" tabindex="-1">
+    <button class="modal-x" type="button" id="guidelinesX" aria-label="Close">×</button>
+
+    <div class="guidelines-head">
+      <div class="guidelines-title-row">
+        <span class="guidelines-book" aria-hidden="true">📘</span>
+        <div>
+          <h2 class="guidelines-title">Report Guidelines</h2>
+          <p class="guidelines-sub">Follow these guidelines to ensure your report is processed effectively</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="guidelines-body">
+      <ol class="guidelines-list">
+        <li class="g-item">
+          <span class="g-num">1</span>
+          <div class="g-text">
+            <div class="g-ttl">Provide a clear and specific report title</div>
+            <div class="g-desc">
+              Use a descriptive title that summarizes the main issue. This helps administrators quickly identify and prioritize reports.
+            </div>
+          </div>
+        </li>
+
+        <li class="g-item">
+          <span class="g-num">2</span>
+          <div class="g-text">
+            <div class="g-ttl">Include complete details (what happened, where, and when)</div>
+            <div class="g-desc">
+              Provide specific information about the incident including date, time, location, and a detailed description of what occurred.
+            </div>
+          </div>
+        </li>
+
+        <li class="g-item">
+          <span class="g-num">3</span>
+          <div class="g-text">
+            <div class="g-ttl">Attach evidence if available (photo or screenshot)</div>
+            <div class="g-desc">
+              Supporting evidence such as photos, screenshots, or documents helps verify your report and speeds up resolution.
+            </div>
+          </div>
+        </li>
+
+        <li class="g-item">
+          <span class="g-num">4</span>
+          <div class="g-text">
+            <div class="g-ttl">Avoid false reports and keep information accurate</div>
+            <div class="g-desc">
+              Only submit truthful reports. False reporting undermines the system and may result in disciplinary action.
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="guidelines-note">
+        <strong>Note:</strong> All reports are taken seriously and will be investigated promptly. Your safety and well-being are our top priorities.
+      </div>
+    </div>
+
+    <div class="guidelines-footer">
+      <button class="guidelines-primary" type="button" id="viewStepsBtn">
+        <span aria-hidden="true">📄</span>
+        View Reporting Steps
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Counseling Services Modal -->
+<div class="modal-overlay" id="counselingOverlay" aria-hidden="true">
+  <div class="counseling-modal" role="dialog" aria-modal="true" aria-label="Counseling Services" tabindex="-1">
+    <button class="modal-x" type="button" id="counselingX" aria-label="Close">×</button>
+
+    <div class="counseling-head">
+      <div class="counseling-title-row">
+        <span class="counseling-ico" aria-hidden="true">♡</span>
+        <div>
+          <h2 class="counseling-title">Counseling Services</h2>
+          <p class="counseling-sub">Professional support for students in need</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="counseling-body">
+      <div class="c-help-card">
+        <div class="c-help-title">We’re here to help</div>
+        <p class="c-help-desc">
+          Our counseling services are available for students who need emotional support or guidance.
+        </p>
+
+        <ul class="c-help-list">
+          <li><span class="c-check">✓</span> For students who need emotional support or guidance</li>
+          <li><span class="c-check">✓</span> Available for bullying, harassment, stress, or personal concerns</li>
+          <li><span class="c-check">✓</span> Conversations are handled with confidentiality</li>
+        </ul>
+      </div>
+
+      <div class="c-warn-card">
+        <div class="c-warn-title">Confidentiality Guaranteed:</div>
+        <div class="c-warn-desc">
+          All counseling sessions are private and confidential. Your personal information will never be shared without your consent.
+        </div>
+      </div>
+    </div>
+
+    <div class="counseling-footer">
+      <button class="counseling-primary" type="button" id="requestCounselingBtn">
+        <span aria-hidden="true">♡</span>
+        Request Counseling
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Emergency Contacts Modal -->
+<div class="modal-overlay" id="emergencyOverlayModal" aria-hidden="true">
+  <div class="emergency-modal" role="dialog" aria-modal="true" aria-label="Emergency Contacts" tabindex="-1">
+    <button class="modal-x" type="button" id="emergencyX" aria-label="Close">×</button>
+
+    <div class="emergency-head">
+      <div class="emergency-title-row">
+        <span class="emergency-ico" aria-hidden="true">📞</span>
+        <div>
+          <h2 class="emergency-title">Emergency Contacts</h2>
+          <p class="emergency-sub">Important contact numbers for emergencies</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="emergency-body">
+
+      <!-- Card 1 -->
+      <div class="e-card e-red">
+        <div class="e-card-top">
+          <div class="e-card-title">Campus Security Hotline</div>
+
+          <div class="e-actions">
+            <a class="e-btn" href="tel:+630441234567" aria-label="Call Campus Security">
+              <span aria-hidden="true">📞</span> Call
+            </a>
+            <button class="e-icon-btn" type="button"
+              data-copy="(044) 123-4567"
+              aria-label="Copy Campus Security number">
+              ⧉
+            </button>
+          </div>
+        </div>
+
+        <div class="e-number">(044) 123-4567</div>
+        <div class="e-desc">24/7 security assistance for immediate threats or emergencies</div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="e-card e-blue">
+        <div class="e-card-top">
+          <div class="e-card-title">Guidance Office</div>
+
+          <div class="e-actions">
+            <a class="e-btn" href="tel:+630441234568" aria-label="Call Guidance Office">
+              <span aria-hidden="true">📞</span> Call
+            </a>
+            <button class="e-icon-btn" type="button"
+              data-copy="(044) 123-4568"
+              aria-label="Copy Guidance Office number">
+              ⧉
+            </button>
+          </div>
+        </div>
+
+        <div class="e-number">(044) 123-4568</div>
+        <div class="e-desc">Student welfare and counseling services</div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="e-card e-green">
+        <div class="e-card-top">
+          <div class="e-card-title">School Clinic / Health Office</div>
+
+          <div class="e-actions">
+            <a class="e-btn" href="tel:+630441234569" aria-label="Call School Clinic">
+              <span aria-hidden="true">📞</span> Call
+            </a>
+            <button class="e-icon-btn" type="button"
+              data-copy="(044) 123-4569"
+              aria-label="Copy School Clinic number">
+              ⧉
+            </button>
+          </div>
+        </div>
+
+        <div class="e-number">(044) 123-4569</div>
+        <div class="e-desc">Medical emergencies and health concerns</div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="e-card e-red">
+        <div class="e-card-top">
+          <div class="e-card-title">Emergency Hotline (911)</div>
+
+          <div class="e-actions">
+            <a class="e-btn" href="tel:911" aria-label="Call 911">
+              <span aria-hidden="true">📞</span> Call
+            </a>
+            <button class="e-icon-btn" type="button"
+              data-copy="911"
+              aria-label="Copy 911">
+              ⧉
+            </button>
+          </div>
+        </div>
+
+        <div class="e-number">911</div>
+        <div class="e-desc">National emergency hotline for police, fire, and medical emergencies</div>
+      </div>
+
+      <div class="e-warning">
+        <span class="e-warn-ico" aria-hidden="true">⚠️</span>
+        <div>
+          <strong>In case of immediate danger:</strong>
+          Call 911 or Campus Security immediately. Do not wait to submit a report.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

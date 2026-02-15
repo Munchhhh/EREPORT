@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SPUSM E-REPORT | Admin Dashboard</title>
+  <link rel="stylesheet" href="css/admin-dashboard.css" />
+</head>
+
+<body>
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <img src="assets/spusm-logo.png" alt="SPUSM Logo"
+               onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');" />
+          <div class="logo-fallback-badge" title="SPUSM"></div>
+        </div>
+
+        <div class="brand-text">
+          <div class="brand-title">SPUSM E-REPORT</div>
+          <div class="brand-subtitle">Web-Based Service Request and Action Tracking - Administrator Portal</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button class="icon-btn" id="notifBtn" title="Notifications" aria-label="Notifications">
+          <span class="notif-dot" id="notifDot">3</span>
+          <!-- bell -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <button class="btn btn-soft" id="exportBtn">
+          <!-- export -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Export Reports
+        </button>
+
+        <div class="admin-pill" title="Admin Account">
+          <span class="admin-avatar">D</span>
+          <span id="adminName">Dr. Admin</span>
+        </div>
+
+        <button class="btn btn-outline" id="logoutBtn">
+          <!-- logout -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M10 17l5-5-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M21 3v18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- Tabs -->
+    <section class="tabs">
+      <button class="tab-pill active" data-tab="tabOverview">Overview</button>
+      <button class="tab-pill" data-tab="tabAllReports">All Reports</button>
+      <button class="tab-pill" data-tab="tabAnalytics">Analytics</button>
+      <button class="tab-pill" data-tab="tabSettings">Settings</button>
+    </section>
+
+    <!-- Content -->
+    <section class="content">
+      <!-- ===================== Overview ===================== -->
+      <div class="tab-content active" id="tabOverview">
+        <!-- Metric Cards -->
+        <div class="metrics">
+          <div class="metric-card">
+            <div class="metric-icon icon-green" aria-hidden="true">
+              <!-- doc -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="metric-meta">
+              <div class="metric-value" id="totalReports">0</div>
+              <div class="metric-label">Total Reports</div>
+            </div>
+          </div>
+
+          <div class="metric-card metric-warn">
+            <div class="metric-icon icon-amber" aria-hidden="true">
+              <!-- clock -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="metric-meta">
+              <div class="metric-value" id="pendingReview">0</div>
+              <div class="metric-label warn">Pending Review</div>
+            </div>
+          </div>
+
+          <div class="metric-card metric-danger">
+            <div class="metric-icon icon-red" aria-hidden="true">
+              <!-- alert -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 9v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="metric-meta">
+              <div class="metric-value" id="highPriorityCount">0</div>
+              <div class="metric-label danger">High Priority</div>
+            </div>
+          </div>
+
+          <div class="metric-card metric-success">
+            <div class="metric-icon icon-mint" aria-hidden="true">
+              <!-- badge -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2 9 6l-5 1 3 4-1 5 6-2 6 2-1-5 3-4-5-1-3-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="metric-meta">
+              <div class="metric-value" id="resolutionRate">0%</div>
+              <div class="metric-label success">Resolution Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- High Priority Section -->
+        <div class="panel danger-panel">
+          <div class="panel-head">
+            <div class="panel-title">
+              <span class="panel-badge" aria-hidden="true">!</span>
+              <div>
+                <div class="panel-name">High Priority Reports</div>
+                <div class="panel-sub">Reports requiring immediate attention</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-body" id="highPriorityList">
+            <!-- items rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Bottom Cards -->
+        <div class="bottom-grid">
+          <div class="panel soft-panel">
+            <div class="panel-head">
+              <div class="panel-title">
+                <span class="panel-icon" aria-hidden="true">
+                  <!-- calendar -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 2v4M16 2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M3 9h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M5 6h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"
+                          stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <div class="panel-name">This Week's Summary</div>
+              </div>
+            </div>
+
+            <div class="panel-body">
+              <div class="kv">
+                <div class="kv-row">
+                  <div class="kv-key">New Reports</div>
+                  <div class="kv-val" id="wkNewReports">0</div>
+                </div>
+                <div class="kv-row">
+                  <div class="kv-key">Reports Resolved</div>
+                  <div class="kv-val" id="wkResolved">0</div>
+                </div>
+                <div class="kv-row">
+                  <div class="kv-key">Average Response Time</div>
+                  <div class="kv-val accent" id="wkAvgResp">0 hours</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel mint-panel">
+            <div class="panel-head">
+              <div class="panel-title">
+                <span class="panel-icon" aria-hidden="true">
+                  <!-- users -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <div class="panel-name">Administrator Workload</div>
+              </div>
+            </div>
+
+            <div class="panel-body" id="workloadList">
+              <!-- rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== All Reports ===================== -->
+<div class="tab-content" id="tabAllReports">
+
+  <!-- Filter Bar (like screenshot) -->
+  <div class="filterbar">
+    <div class="filterbar-inner">
+      <div class="filter search">
+        <span class="filter-ico" aria-hidden="true">
+          <!-- search -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </span>
+        <input class="filter-input" id="arSearch" placeholder="Search reports..." />
+      </div>
+
+      <div class="filter">
+        <select class="filter-select" id="arStatus">
+          <option value="">Status</option>
+          <option value="Pending">Pending</option>
+          <option value="Under Review">Under Review</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Resolved">Resolved</option>
+        </select>
+      </div>
+
+      <div class="filter">
+        <select class="filter-select" id="arType">
+          <option value="">Type</option>
+          <option value="Bullying">Bullying</option>
+          <option value="Property Damage">Property Damage</option>
+          <option value="Safety">Safety</option>
+          <option value="Academic">Academic</option>
+          <option value="Discrimination">Discrimination</option>
+          <option value="Facilities">Facilities</option>
+          <option value="Technology">Technology</option>
+          <option value="Theft">Theft</option>
+        </select>
+      </div>
+
+      <button class="filter-btn" id="applyFiltersBtn" type="button">
+        <span class="filter-ico" aria-hidden="true">
+          <!-- funnel -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M3 4h18l-7 8v6l-4 2v-8L3 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        Apply Filters
+      </button>
+    </div>
+  </div>
+
+  <!-- Table Card -->
+  <div class="table-card">
+    <div class="table-card-head">
+      <div>
+        <div class="table-title">All Reports Management</div>
+        <div class="table-sub">Comprehensive view of all submitted reports</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="reports-table">
+        <thead>
+          <tr>
+            <th class="col-id">ID</th>
+            <th class="col-title">Title</th>
+            <th class="col-type">Type</th>
+            <th class="col-priority">Priority</th>
+            <th class="col-status">Status</th>
+            <th class="col-submitted">Submitted By</th>
+            <th class="col-date">Date</th>
+            <th class="col-actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="allReportsTbody">
+          <!-- rows rendered by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+      <!-- ===================== Analytics ===================== -->
+<!-- ===================== Analytics ===================== -->
+<div class="tab-content" id="tabAnalytics">
+
+  <div class="analytics-grid">
+
+    <!-- Reports by Category -->
+    <div class="panel analytics-panel">
+      <div class="panel-head">
+        <div class="panel-title">
+          <div class="panel-name">Reports by Category</div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="cat-list" id="catList">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Resolution Metrics -->
+    <div class="panel analytics-metrics">
+      <div class="panel-head">
+        <div class="panel-title">
+          <div class="panel-name">Resolution Metrics</div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="metric-kv">
+          <div class="kv-line"><span>Average Resolution Time</span><strong id="mAvg">0 days</strong></div>
+          <div class="kv-line"><span>Fastest Resolution</span><strong class="good" id="mFast">0 days</strong></div>
+          <div class="kv-line"><span>Longest Resolution</span><strong class="bad" id="mLong">0 days</strong></div>
+          <div class="kv-line"><span>This Month</span><strong id="mMonth">0 Reports</strong></div>
+          <div class="kv-line"><span>Resolution Rate</span><strong class="good" id="mRate">0%</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <!-- ===================== Settings ===================== -->
+      <!-- ===================== Settings ===================== -->
+<div class="tab-content" id="tabSettings">
+
+  <div class="settings-wrap">
+
+    <!-- Header card -->
+    <div class="panel settings-panel">
+      <div class="settings-head">
+        <div class="settings-h-title">SPUSM E-REPORT System Configuration</div>
+        <div class="settings-h-sub">
+          Manage system settings and administrative preferences for the Web-Based Service Request and Action Tracking system
+        </div>
+      </div>
+
+      <div class="panel-body settings-body">
+
+        <!-- Report Categories -->
+        <div class="set-section">
+          <div class="set-label">Report Categories</div>
+
+          <div class="set-list" id="catSettingsList"></div>
+
+          <button class="set-add" id="addCategoryBtn" type="button">Add New Category</button>
+        </div>
+
+        <!-- Report Tags & Labels -->
+        <div class="set-section">
+          <div class="set-label">Report Tags &amp; Labels</div>
+          <div class="set-sub">Manage tags used for categorizing and tracking report action items</div>
+
+          <div class="set-list" id="tagSettingsList"></div>
+
+          <button class="set-add" id="addTagBtn" type="button">
+            <span class="tag-ico" aria-hidden="true">🏷</span>
+            Add New Tag
+          </button>
+        </div>
+
+        <!-- Administrator Assignments -->
+        <div class="set-section">
+          <div class="set-label">Administrator Assignments</div>
+
+          <div class="set-list" id="adminAssignList"></div>
+        </div>
+
+        <!-- Notification Preferences -->
+        <div class="set-section">
+          <div class="set-label">Notification Preferences</div>
+
+          <div class="notif-box">
+            <label class="chk">
+              <input type="checkbox" id="npEmail" checked />
+              <span>Email notifications for new reports</span>
+            </label>
+
+            <label class="chk">
+              <input type="checkbox" id="npUrgent" checked />
+              <span>Immediate alerts for high priority reports</span>
+            </label>
+
+            <label class="chk">
+              <input type="checkbox" id="npDaily" />
+              <span>Daily summary reports</span>
+            </label>
+
+            <label class="chk">
+              <input type="checkbox" id="npWeekly" checked />
+              <span>Weekly analytics reports</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Save -->
+        <button class="save-all" id="saveAllSettingsBtn" type="button">Save All Settings</button>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+    </section>
+  </main>
+
+  <!-- Modal -->
+<!-- Report Management Modal -->
+<div class="rm-backdrop" id="modalBackdrop" aria-hidden="true">
+
+  <div class="rm-modal">
+
+    <!-- Header -->
+    <div class="rm-head">
+      <div>
+        <h3 class="rm-title">Report Management</h3>
+        <p class="rm-sub">Review, assign priority, add tags, and manage report details</p>
+      </div>
+      <button class="rm-close" id="closeModalBtn">✕</button>
+    </div>
+
+    <!-- Body -->
+    <div class="rm-body">
+
+      <!-- Summary Card -->
+      <div class="rm-card">
+        <h4 id="rmTitle">Cyberbullying Incident</h4>
+
+        <div class="rm-badges">
+          <span class="badge st-review" id="rmStatusBadge">Under Review</span>
+          <span class="badge" id="rmTypeBadge">Bullying</span>
+        </div>
+
+        <div class="rm-meta">
+          <div>Report ID: <strong id="rmId">#000001</strong></div>
+          <div>Submitted By: <strong id="rmSubmitted"></strong></div>
+          <div>Date: <strong id="rmDate"></strong></div>
+        </div>
+
+        <p class="rm-desc" id="rmDesc"></p>
+      </div>
+
+      <!-- Priority & Status -->
+      <div class="rm-grid2">
+        <div>
+          <label>Assign Priority Level</label>
+          <select id="rmPriority">
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Update Status</label>
+          <select id="rmStatus">
+            <option>Pending</option>
+            <option>Under Review</option>
+            <option>In Progress</option>
+            <option>Resolved</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="rm-section">
+        <label>Report Tags & Labels</label>
+
+        <div class="rm-tags" id="rmTags">
+          <span class="tag">Requires Follow-up</span>
+          <span class="tag">Student Welfare</span>
+          <span class="tag">Urgent Response</span>
+          <span class="tag">Legal Review</span>
+          <span class="tag">Counseling Needed</span>
+          <span class="tag">Facilities Action</span>
+          <span class="tag">IT Support</span>
+          <span class="tag">Policy Violation</span>
+          <span class="tag">Parent Contact</span>
+          <span class="tag">Documentation Required</span>
+        </div>
+      </div>
+
+      <!-- Assign Admin -->
+      <div class="rm-section">
+        <label>Assign to Administrator</label>
+        <select id="rmAssign">
+          <option>Dr. J. Smith (Dean of Students)</option>
+          <option>M. Johnson</option>
+          <option>K. Davis</option>
+        </select>
+      </div>
+
+      <!-- Notes -->
+      <div class="rm-section">
+        <label>Administrative Notes</label>
+        <textarea id="rmNotes" placeholder="Add internal notes, actions taken, or follow-up items..."></textarea>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="rm-footer">
+      <button class="btn btn-solid" id="saveReportBtn">Save Changes</button>
+      <button class="btn btn-outline" id="cancelReportBtn">Cancel</button>
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Notifications Dropdown -->
+<div class="notif-dropdown" id="notifDropdown" aria-hidden="true">
+  <div class="notif-head">
+    <div class="notif-head-left">
+      <span class="notif-bell" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <div class="notif-title">Notifications</div>
+    </div>
+    <span class="notif-new-pill" id="notifNewPill">3 new</span>
+  </div>
+
+  <div class="notif-list" id="notifList"></div>
+
+  <div class="notif-footer">
+    <button class="notif-footer-btn" id="markAllReadBtn">Mark all as read</button>
+    <button class="notif-footer-btn solid" id="viewAllNotifBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      View all
+    </button>
+  </div>
+</div>
+
+
+  <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

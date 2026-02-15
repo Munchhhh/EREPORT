@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SPUSM E-REPORT | Report Details</title>
+
+  <!-- reuse your dashboard styles -->
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <!-- new styles for this page -->
+  <link rel="stylesheet" href="css/report-details.css" />
+</head>
+
+<body>
+  <!-- Top Header (simple header for details page) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <img src="assets/spusm-logo.png" alt="SPUSM Logo"
+               onerror="this.style.display='none'; this.parentElement.classList.add('logo-fallback');"/>
+          <div class="logo-fallback-badge" title="SPUSM"></div>
+        </div>
+
+        <div class="brand-text">
+          <div class="brand-title">SPUSM E-REPORT</div>
+          <div class="brand-subtitle">Web-Based Service Request and Action Tracking</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <a class="outline-btn" href="user-dashboard.html" style="text-decoration:none;">← Back to Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container details-wrap">
+
+      <!-- Page Title Card -->
+      <section class="details-hero">
+        <div class="details-hero-left">
+          <h1 class="details-title">Report Details</h1>
+          <p class="details-sub">Complete information about your submitted report</p>
+        </div>
+
+        <div class="details-hero-right" id="detailsChips">
+          <!-- chips inserted by JS -->
+        </div>
+      </section>
+
+      <!-- Report Information Card -->
+      <section class="details-card">
+        <div class="details-card-head">
+          <div class="details-card-head-left">
+            <span class="details-ico" aria-hidden="true">📄</span>
+            <span class="details-card-title">Report Information</span>
+          </div>
+        </div>
+
+        <div class="details-card-body">
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label">Report ID</div>
+              <div class="info-value" id="dReportId">#000001</div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">Date Submitted</div>
+              <div class="info-value">
+                <span class="mini-ico" aria-hidden="true">📅</span>
+                <span id="dSubmitted">2024-01-15</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">Title</div>
+              <div class="info-value" id="dTitle">Cyberbullying Incident</div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-label">Category</div>
+              <div class="info-value">
+                <span class="pill" id="dCategory">Bullying</span>
+              </div>
+            </div>
+
+            <div class="info-item info-span-2">
+              <div class="info-label">Location</div>
+              <div class="info-value" id="dLocation">Main Building - Room 203</div>
+            </div>
+          </div>
+
+          <div class="desc-box">
+            <div class="info-label">Description</div>
+            <div class="desc-card" id="dDescription">
+              The electric fan in Room 203 is not functioning properly...
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Attachments -->
+      <section class="details-card">
+        <div class="details-card-head">
+          <div class="details-card-head-left">
+            <span class="details-ico" aria-hidden="true">🖼️</span>
+            <span class="details-card-title">Attachments <span class="muted" id="dAttachCount">(0)</span></span>
+          </div>
+        </div>
+
+        <div class="details-card-body">
+          <div class="attach-grid" id="attachGrid">
+            <!-- thumbnails injected by JS -->
+          </div>
+          <div class="muted small" id="attachEmpty" style="display:none;">No attachments were uploaded.</div>
+        </div>
+      </section>
+
+      <!-- Status Timeline -->
+      <section class="details-card">
+        <div class="details-card-head">
+          <div class="details-card-head-left">
+            <span class="details-ico" aria-hidden="true">🕒</span>
+            <span class="details-card-title">Status Timeline</span>
+          </div>
+        </div>
+
+        <div class="details-card-body">
+          <div class="timeline" id="timeline">
+            <!-- inserted by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Buttons -->
+      <section class="details-actions">
+        <a class="outline-wide" id="backToReports" href="user-dashboard.html">← Back to My Reports</a>
+        <button class="danger-wide" id="withdrawBtn" type="button">
+          <span aria-hidden="true">⚠</span> Withdraw Report
+        </button>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Image preview modal (simple) -->
+  <div class="img-overlay" id="imgOverlay" aria-hidden="true">
+    <button class="img-x" id="imgX" type="button" aria-label="Close">×</button>
+    <img id="imgPreview" alt="Attachment preview" />
+  </div>
+
+  <script src="js/report-details.js"></script>
+</body>
+</html>
